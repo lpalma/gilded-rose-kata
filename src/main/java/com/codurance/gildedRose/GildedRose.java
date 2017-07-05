@@ -26,6 +26,10 @@ class GildedRose {
 
         updateSellIn(item);
 
+        updateQualityBasedOnSellIn(item);
+    }
+
+    private void updateQualityBasedOnSellIn(Item item) {
         if (item.sellIn < 0) {
             if (!item.name.equals("Aged Brie")) {
                 if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
