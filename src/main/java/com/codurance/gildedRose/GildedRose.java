@@ -19,7 +19,7 @@ class GildedRose {
 
     private void updateQualityFor(Item item) {
         if (shouldDecreaseQuality(item)) {
-            item.quality = item.quality - 1;
+            decreaseQuality(item);
         } else {
             increaseQuality(item);
         }
@@ -33,7 +33,7 @@ class GildedRose {
                 if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                     if (item.quality > 0) {
                         if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                            item.quality = item.quality - 1;
+                            decreaseQuality(item);
                         }
                     }
                 } else {
@@ -45,6 +45,10 @@ class GildedRose {
                 }
             }
         }
+    }
+
+    private void decreaseQuality(Item item) {
+        item.quality = item.quality - 1;
     }
 
     private void increaseQuality(Item item) {
