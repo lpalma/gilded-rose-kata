@@ -12,13 +12,13 @@ public class Item {
 
     private String name;
 
-    private int sellIn;
+    private SellIn sellIn;
 
     private ItemQuality quality;
 
     public Item(String name, int sellIn, int quality) {
         this.name = name;
-        this.sellIn = sellIn;
+        this.sellIn = new SellIn(sellIn);
         this.quality = new ItemQuality(quality);
     }
 
@@ -28,7 +28,7 @@ public class Item {
 
    @Override
    public String toString() {
-        return this.name + ", " + this.sellIn + ", " + quality.value();
+        return this.name + ", " + sellIn.value() + ", " + quality.value();
     }
 
     public String name() {
@@ -119,7 +119,7 @@ public class Item {
     }
 
     private void decreaseSellInByOne() {
-        sellIn = sellIn - 1;
+        sellIn.decreaseByOne();
     }
 
     private boolean hasQualityGreaterThan(int value) {
@@ -139,6 +139,6 @@ public class Item {
     }
 
     private boolean isSellInBelow(int value) {
-        return sellIn < value;
+        return sellIn.below(value);
     }
 }
