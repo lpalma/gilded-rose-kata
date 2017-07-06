@@ -49,7 +49,7 @@ public class Item {
             return;
         }
 
-        updateOtherItems();
+        decreaseQuality();
     }
 
     private void decreaseSellIn() {
@@ -89,10 +89,6 @@ public class Item {
         if (isBackstagePasses()) {
             updateBackstagePasses();
         }
-    }
-
-    private void updateOtherItems() {
-        decreaseQuality();
     }
 
     private void decreaseQuality() {
