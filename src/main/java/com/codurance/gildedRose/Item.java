@@ -50,7 +50,21 @@ public class Item {
     }
 
     public void update() {
+        if (isSpecialItem()) {
+            updateSpecialItems();
+            return;
+        }
 
+        updateOtherItems();
+    }
+
+    private boolean isSpecialItem() {
+        return isAgedBrie()
+                || isBackstagePasses()
+                || isSulfurasHandOfRagnaros();
+    }
+
+    private void updateSpecialItems() {
         if (isAgedBrie()) {
             updateAgedBrie();
             return;
@@ -61,12 +75,7 @@ public class Item {
             return;
         }
 
-        if (isSulfurasHandOfRagnaros()) {
-            updateSulfurasHandOfRagnaros();
-            return;
-        }
-
-        updateOtherItems();
+        updateSulfurasHandOfRagnaros();
     }
 
     private void updateSulfurasHandOfRagnaros() {
