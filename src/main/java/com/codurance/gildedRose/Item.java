@@ -106,21 +106,25 @@ public class Item {
     }
 
     private void updateBackstagePasses() {
-        increaseQuality();
-
         if (isSellInBelow(ZERO)) {
             setQualityToZero();
+            return;
         }
+
+        increaseQuality();
     }
 
     private void increaseQuality() {
-        if (isSellInBelow(TEN) && hasQualityLessThan(FIFTY)) {
+        if (!hasQualityLessThan(FIFTY)) {
+            return;
+        }
 
+        if (isSellInBelow(TEN)) {
             increaseQualityByOne();
+        }
 
-            if (isSellInBelow(FIVE)) {
-                increaseQualityByOne();
-            }
+        if (isSellInBelow(FIVE)) {
+            increaseQualityByOne();
         }
     }
 
