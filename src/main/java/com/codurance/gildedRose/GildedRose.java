@@ -70,12 +70,12 @@ class GildedRose {
 
             if (item.hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)
                     && item.sellIn < 11
-                    && item.quality < 50) {
+                    && item.hasQualityLessThan(FIFTY)) {
 
-                item.quality = item.quality + 1;
+                item.increaseQualityByOne();
 
                 if (item.sellIn < 6 && item.sellIn < 50) {
-                    item.quality = item.quality + 1;
+                    item.increaseQualityByOne();
                 }
             }
         }
