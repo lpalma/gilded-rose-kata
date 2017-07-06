@@ -20,7 +20,7 @@ public class Item {
         this.quality = quality;
     }
 
-    public boolean hasName(String name) {
+    private boolean hasName(String name) {
         return this.name.equals(name);
     }
 
@@ -31,22 +31,6 @@ public class Item {
 
     public String name() {
         return name;
-    }
-
-    public boolean hasQualityGreaterThan(int value) {
-        return quality > value;
-    }
-
-    public void decreaseQualityByOne() {
-        --quality;
-    }
-
-    public boolean hasQualityLessThan(int value) {
-        return quality < value;
-    }
-
-    public void increaseQualityByOne() {
-        ++quality;
     }
 
     public void update() {
@@ -153,5 +137,21 @@ public class Item {
 
     private void decreaseSellInByOne() {
         sellIn = sellIn - 1;
+    }
+
+    private boolean hasQualityGreaterThan(int value) {
+        return quality > value;
+    }
+
+    private void decreaseQualityByOne() {
+        --quality;
+    }
+
+    private boolean hasQualityLessThan(int value) {
+        return quality < value;
+    }
+
+    private void increaseQualityByOne() {
+        ++quality;
     }
 }
