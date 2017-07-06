@@ -103,7 +103,7 @@ public class Item {
         decreaseSellInByOne();
 
         if (isSellInBelow(ZERO)) {
-            updateQualityForBackstagePasses();
+            setQualityToZero();
         }
     }
 
@@ -126,7 +126,7 @@ public class Item {
         }
     }
 
-    private void updateQualityForBackstagePasses() {
+    private void setQualityToZero() {
         quality.setToZero();
     }
 
