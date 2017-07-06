@@ -58,15 +58,25 @@ public class Item {
 
         updateSellIn();
 
+        if (isAgedBrie()) {
+            updateAgedBrie();
+        }
+
         updateQualityBasedOnSellIn();
+    }
+
+    private void updateAgedBrie() {
+        if (sellIn < 0) {
+            updateQualityForAgedBrie();
+        }
+    }
+
+    private boolean isAgedBrie() {
+        return hasName(AGED_BRIE);
     }
 
     private void updateQualityBasedOnSellIn() {
         if (sellIn < 0) {
-            if (hasName(AGED_BRIE)) {
-                updateQualityForAgedBrie();
-            }
-
             if (hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)) {
                 updateQualityForBackstagePasses();
             }
