@@ -78,11 +78,11 @@ public class Item {
     }
 
     private void updateOtherItems() {
+        decreaseSellInByOne();
+
         if (hasQualityGreaterThan(ZERO)) {
             decreaseQualityByOne();
         }
-
-        decreaseSellInByOne();
 
         if (isSellInBelow(ZERO) && hasQualityGreaterThan(ZERO)) {
             decreaseQualityByOne();
@@ -94,7 +94,7 @@ public class Item {
 
             increaseQualityByOne();
 
-            if (isSellInBelow(SIX) && isSellInBelow(FIFTY)) {
+            if (isSellInBelow(SIX)) {
                 increaseQualityByOne();
             }
         }
@@ -109,19 +109,13 @@ public class Item {
     private void updateAgedBrie() {
         decreaseSellInByOne();
 
-        if (isSellInBelow(ZERO)) {
-            updateQualityForAgedBrie();
+        if (isSellInBelow(ZERO) && hasQualityLessThan(FIFTY)) {
+            increaseQualityByOne();
         }
     }
 
     private void updateQualityForBackstagePasses() {
         quality = 0;
-    }
-
-    private void updateQualityForAgedBrie() {
-        if (quality < 50) {
-            quality = quality + 1;
-        }
     }
 
     private void decreaseSellInByOne() {
