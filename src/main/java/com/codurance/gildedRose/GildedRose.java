@@ -23,7 +23,7 @@ class GildedRose {
     }
 
     private void updateQualityFor(Item item) {
-        if (shouldDecreaseQuality(item)) {
+        if (shouldDecreaseQualityByOne(item)) {
             decreaseQualityByOne(item);
         } else {
             increaseQuality(item);
@@ -81,7 +81,7 @@ class GildedRose {
         }
     }
 
-    private boolean shouldDecreaseQuality(Item item) {
+    private boolean shouldDecreaseQualityByOne(Item item) {
         return !item.hasName(AGED_BRIE)
                 && !item.hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)
                 && !item.hasName(SULFURAS_HAND_OF_RAGNAROS)
