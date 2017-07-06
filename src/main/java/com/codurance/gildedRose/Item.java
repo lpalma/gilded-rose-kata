@@ -26,4 +26,8 @@ public class Item {
     public String name() {
         return name;
     }
+
+    public boolean hasQualityGreaterThan(int value) {
+        return quality > value;
+    }
 }
