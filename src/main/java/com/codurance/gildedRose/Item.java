@@ -7,6 +7,8 @@ public class Item {
     public static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
     public static final int ZERO = 0;
     public static final int FIFTY = 50;
+    public static final int ELEVEN = 11;
+    public static final int SIX = 6;
 
     private String name;
 
@@ -81,7 +83,7 @@ public class Item {
 
         decreaseSellInByOne();
 
-        if (sellIn < 0 && hasQualityGreaterThan(ZERO)) {
+        if (isSellInBelow(ZERO) && hasQualityGreaterThan(ZERO)) {
             decreaseQualityByOne();
         }
     }
@@ -97,18 +99,18 @@ public class Item {
             increaseQualityByOne();
         }
 
-        if (sellIn < 11 && hasQualityLessThan(FIFTY)) {
+        if (isSellInBelow(ELEVEN) && hasQualityLessThan(FIFTY)) {
 
             increaseQualityByOne();
 
-            if (sellIn < 6 && sellIn < 50) {
+            if (isSellInBelow(SIX) && isSellInBelow(FIFTY)) {
                 increaseQualityByOne();
             }
         }
 
         decreaseSellInByOne();
 
-        if (sellIn < 0) {
+        if (isSellInBelow(ZERO)) {
             updateQualityForBackstagePasses();
         }
     }
@@ -120,7 +122,7 @@ public class Item {
 
         decreaseSellInByOne();
 
-        if (sellIn < 0) {
+        if (isSellInBelow(ZERO)) {
             updateQualityForAgedBrie();
         }
     }
@@ -153,5 +155,9 @@ public class Item {
 
     private void increaseQualityByOne() {
         ++quality;
+    }
+
+    private boolean isSellInBelow(int value) {
+        return sellIn < value;
     }
 }
