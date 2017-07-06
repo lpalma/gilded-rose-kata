@@ -68,17 +68,14 @@ class GildedRose {
         if (item.hasQualityLessThan(FIFTY)) {
             item.increaseQualityByOne();
 
-            if (item.hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)) {
-                if (item.sellIn < 11) {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
-                }
+            if (item.hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)
+                    && item.sellIn < 11
+                    && item.quality < 50) {
 
-                if (item.sellIn < 6) {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
+                item.quality = item.quality + 1;
+
+                if (item.sellIn < 6 && item.sellIn < 50) {
+                    item.quality = item.quality + 1;
                 }
             }
         }
