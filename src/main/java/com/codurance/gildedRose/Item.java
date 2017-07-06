@@ -9,6 +9,8 @@ public class Item {
     public static final int FIFTY = 50;
     public static final int ELEVEN = 11;
     public static final int SIX = 6;
+    public static final int TEN = 10;
+    public static final int FIVE = 5;
 
     private ItemName name;
 
@@ -40,12 +42,20 @@ public class Item {
     }
 
     public void update() {
+        decreaseSellIn();
+
         if (isSpecialItem()) {
             updateSpecialItems();
             return;
         }
 
         updateOtherItems();
+    }
+
+    private void decreaseSellIn() {
+        if (!isSulfurasHandOfRagnaros()) {
+            decreaseSellInByOne();
+        }
     }
 
     private boolean isSpecialItem() {
@@ -82,8 +92,6 @@ public class Item {
     }
 
     private void updateOtherItems() {
-        decreaseSellInByOne();
-
         decreaseQuality();
     }
 
@@ -100,27 +108,23 @@ public class Item {
     private void updateBackstagePasses() {
         increaseQuality();
 
-        decreaseSellInByOne();
-
         if (isSellInBelow(ZERO)) {
             setQualityToZero();
         }
     }
 
     private void increaseQuality() {
-        if (isSellInBelow(ELEVEN) && hasQualityLessThan(FIFTY)) {
+        if (isSellInBelow(TEN) && hasQualityLessThan(FIFTY)) {
 
             increaseQualityByOne();
 
-            if (isSellInBelow(SIX)) {
+            if (isSellInBelow(FIVE)) {
                 increaseQualityByOne();
             }
         }
     }
 
     private void updateAgedBrie() {
-        decreaseSellInByOne();
-
         if (isSellInBelow(ZERO) && hasQualityLessThan(FIFTY)) {
             increaseQualityByOne();
         }
