@@ -34,4 +34,12 @@ public class Item {
     public void decreaseQualityByOne() {
         --quality;
     }
+
+    public boolean hasQualityLessThan(int value) {
+        return quality < value;
+    }
+
+    public void increaseQualityByOne() {
+        ++quality;
+    }
 }

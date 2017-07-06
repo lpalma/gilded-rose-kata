@@ -5,6 +5,7 @@ class GildedRose {
     public static final String BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
     public static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
     public static final int ZERO = 0;
+    public static final int FIFTY = 50;
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -64,8 +65,8 @@ class GildedRose {
     }
 
     private void increaseQuality(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
+        if (item.hasQualityLessThan(FIFTY)) {
+            item.increaseQualityByOne();
 
             if (item.hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)) {
                 if (item.sellIn < 11) {
