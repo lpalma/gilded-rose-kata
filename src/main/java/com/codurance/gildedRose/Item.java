@@ -52,8 +52,6 @@ public class Item {
     public void update() {
         if (shouldDecreaseQualityByOne()) {
             decreaseQualityByOne();
-        } else {
-            increaseQuality();
         }
 
         if (isAgedBrie()) {
@@ -65,13 +63,35 @@ public class Item {
             updateBackstagePasses();
             return;
         }
-        
-        if (!isSulfurasHandOfRagnaros()) {
-            updateOtherItems();
+
+        if (isSulfurasHandOfRagnaros()) {
+            updateSulfurasHandOfRagnaros();
+            return;
+        }
+
+        updateOtherItems();
+    }
+
+    private void updateSulfurasHandOfRagnaros() {
+        if (hasQualityLessThan(FIFTY)) {
+            increaseQualityByOne();
         }
     }
 
     private void updateBackstagePasses() {
+        if (hasQualityLessThan(FIFTY)) {
+            increaseQualityByOne();
+        }
+
+        if (sellIn < 11 && hasQualityLessThan(FIFTY)) {
+
+            increaseQualityByOne();
+
+            if (sellIn < 6 && sellIn < 50) {
+                increaseQualityByOne();
+            }
+        }
+
         updateSellIn();
 
         if (sellIn < 0) {
@@ -84,6 +104,10 @@ public class Item {
     }
 
     private void updateAgedBrie() {
+        if (hasQualityLessThan(FIFTY)) {
+            increaseQualityByOne();
+        }
+
         updateSellIn();
 
         if (sellIn < 0) {
@@ -119,23 +143,6 @@ public class Item {
 
     private void updateSellIn() {
         sellIn = sellIn - 1;
-    }
-
-    private void increaseQuality() {
-        if (hasQualityLessThan(FIFTY)) {
-            increaseQualityByOne();
-
-            if (hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)
-                    && sellIn < 11
-                    && hasQualityLessThan(FIFTY)) {
-
-                increaseQualityByOne();
-
-                if (sellIn < 6 && sellIn < 50) {
-                    increaseQualityByOne();
-                }
-            }
-        }
     }
 
     private boolean shouldDecreaseQualityByOne() {
