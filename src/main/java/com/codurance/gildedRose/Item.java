@@ -2,7 +2,7 @@ package com.codurance.gildedRose;
 
 public class Item {
 
-    public String name;
+    private String name;
 
     public int sellIn;
 
@@ -14,8 +14,16 @@ public class Item {
         this.quality = quality;
     }
 
+    public boolean hasName(String name) {
+        return this.name.equals(name);
+    }
+
    @Override
    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
+    }
+
+    public String name() {
+        return name;
     }
 }

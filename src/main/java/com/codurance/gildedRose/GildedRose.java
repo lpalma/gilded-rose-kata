@@ -34,10 +34,10 @@ class GildedRose {
 
     private void updateQualityBasedOnSellIn(Item item) {
         if (item.sellIn < 0) {
-            if (!item.name.equals(AGED_BRIE)) {
-                if (!item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)) {
+            if (!item.hasName(AGED_BRIE)) {
+                if (!item.hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)) {
                     if (item.quality > 0) {
-                        if (!item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
+                        if (!item.hasName(SULFURAS_HAND_OF_RAGNAROS)) {
                             decreaseQuality(item);
                         }
                     }
@@ -53,7 +53,7 @@ class GildedRose {
     }
 
     private void updateSellIn(Item item) {
-        if (!item.name.equals(SULFURAS_HAND_OF_RAGNAROS)) {
+        if (!item.hasName(SULFURAS_HAND_OF_RAGNAROS)) {
             item.sellIn = item.sellIn - 1;
         }
     }
@@ -66,7 +66,7 @@ class GildedRose {
         if (item.quality < 50) {
             item.quality = item.quality + 1;
 
-            if (item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)) {
+            if (item.hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)) {
                 if (item.sellIn < 11) {
                     if (item.quality < 50) {
                         item.quality = item.quality + 1;
@@ -83,9 +83,9 @@ class GildedRose {
     }
 
     private boolean shouldDecreaseQuality(Item item) {
-        return !item.name.equals(AGED_BRIE)
-                && !item.name.equals(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)
-                && !item.name.equals(SULFURAS_HAND_OF_RAGNAROS)
+        return !item.hasName(AGED_BRIE)
+                && !item.hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)
+                && !item.hasName(SULFURAS_HAND_OF_RAGNAROS)
                 && item.quality > 0;
     }
 }
