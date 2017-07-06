@@ -23,7 +23,7 @@ class GildedRose {
 
     private void updateQualityFor(Item item) {
         if (shouldDecreaseQuality(item)) {
-            decreaseQuality(item);
+            decreaseQualityByOne(item);
         } else {
             increaseQuality(item);
         }
@@ -39,7 +39,7 @@ class GildedRose {
                 if (!item.hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)) {
                     if (item.quality > 0) {
                         if (!item.hasName(SULFURAS_HAND_OF_RAGNAROS)) {
-                            decreaseQuality(item);
+                            decreaseQualityByOne(item);
                         }
                     }
                 } else {
@@ -59,8 +59,8 @@ class GildedRose {
         }
     }
 
-    private void decreaseQuality(Item item) {
-        item.quality = item.quality - 1;
+    private void decreaseQualityByOne(Item item) {
+        item.decreaseQualityByOne();
     }
 
     private void increaseQuality(Item item) {
