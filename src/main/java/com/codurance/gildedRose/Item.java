@@ -10,29 +10,33 @@ public class Item {
     public static final int ELEVEN = 11;
     public static final int SIX = 6;
 
-    private String name;
+    private ItemName name;
 
     private SellIn sellIn;
 
     private ItemQuality quality;
 
     public Item(String name, int sellIn, int quality) {
-        this.name = name;
+        this.name = new ItemName(name);
         this.sellIn = new SellIn(sellIn);
         this.quality = new ItemQuality(quality);
     }
 
     private boolean hasName(String name) {
-        return this.name.equals(name);
+        return this.name.is(name);
     }
 
    @Override
    public String toString() {
-        return this.name + ", " + sellIn.value() + ", " + quality.value();
+        return name.value()
+                + ", "
+                + sellIn.value()
+                + ", "
+                + quality.value();
     }
 
     public String name() {
-        return name;
+        return name.value();
     }
 
     public void update() {
