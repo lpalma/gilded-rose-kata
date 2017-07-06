@@ -64,6 +64,18 @@ public class Item {
                 || isSulfurasHandOfRagnaros();
     }
 
+    private boolean isBackstagePasses() {
+        return hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT);
+    }
+
+    private boolean isAgedBrie() {
+        return hasName(AGED_BRIE);
+    }
+
+    private boolean isSulfurasHandOfRagnaros() {
+        return hasName(SULFURAS_HAND_OF_RAGNAROS);
+    }
+
     private void updateSpecialItems() {
         if (isAgedBrie()) {
             updateAgedBrie();
@@ -76,6 +88,18 @@ public class Item {
         }
 
         updateSulfurasHandOfRagnaros();
+    }
+
+    private void updateOtherItems() {
+        if (hasQualityGreaterThan(ZERO)) {
+            decreaseQualityByOne();
+        }
+
+        updateSellIn();
+
+        if (sellIn < 0 && hasQualityGreaterThan(ZERO)) {
+            decreaseQualityByOne();
+        }
     }
 
     private void updateSulfurasHandOfRagnaros() {
@@ -105,10 +129,6 @@ public class Item {
         }
     }
 
-    private boolean isBackstagePasses() {
-        return hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT);
-    }
-
     private void updateAgedBrie() {
         if (hasQualityLessThan(FIFTY)) {
             increaseQualityByOne();
@@ -119,26 +139,6 @@ public class Item {
         if (sellIn < 0) {
             updateQualityForAgedBrie();
         }
-    }
-
-    private boolean isAgedBrie() {
-        return hasName(AGED_BRIE);
-    }
-
-    private void updateOtherItems() {
-        if (hasQualityGreaterThan(ZERO)) {
-            decreaseQualityByOne();
-        }
-
-        updateSellIn();
-
-        if (sellIn < 0 && hasQualityGreaterThan(ZERO)) {
-            decreaseQualityByOne();
-        }
-    }
-
-    private boolean isSulfurasHandOfRagnaros() {
-        return hasName(SULFURAS_HAND_OF_RAGNAROS);
     }
 
     private void updateQualityForBackstagePasses() {
