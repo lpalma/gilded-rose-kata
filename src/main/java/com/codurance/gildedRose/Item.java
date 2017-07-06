@@ -50,9 +50,6 @@ public class Item {
     }
 
     public void update() {
-        if (shouldDecreaseQualityByOne()) {
-            decreaseQualityByOne();
-        }
 
         if (isAgedBrie()) {
             updateAgedBrie();
@@ -120,6 +117,10 @@ public class Item {
     }
 
     private void updateOtherItems() {
+        if (hasQualityGreaterThan(ZERO)) {
+            decreaseQualityByOne();
+        }
+
         updateSellIn();
 
         if (sellIn < 0 && hasQualityGreaterThan(ZERO)) {
@@ -143,12 +144,5 @@ public class Item {
 
     private void updateSellIn() {
         sellIn = sellIn - 1;
-    }
-
-    private boolean shouldDecreaseQualityByOne() {
-        return !hasName(AGED_BRIE)
-                && !hasName(BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT)
-                && !hasName(SULFURAS_HAND_OF_RAGNAROS)
-                && hasQualityGreaterThan(ZERO);
     }
 }
