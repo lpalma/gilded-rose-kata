@@ -14,12 +14,12 @@ public class Item {
 
     private int sellIn;
 
-    private int quality;
+    private ItemQuality quality;
 
     public Item(String name, int sellIn, int quality) {
         this.name = name;
         this.sellIn = sellIn;
-        this.quality = quality;
+        this.quality = new ItemQuality(quality);
     }
 
     private boolean hasName(String name) {
@@ -28,7 +28,7 @@ public class Item {
 
    @Override
    public String toString() {
-        return this.name + ", " + this.sellIn + ", " + this.quality;
+        return this.name + ", " + this.sellIn + ", " + quality.value();
     }
 
     public String name() {
@@ -115,7 +115,7 @@ public class Item {
     }
 
     private void updateQualityForBackstagePasses() {
-        quality = 0;
+        quality.setToZero();
     }
 
     private void decreaseSellInByOne() {
@@ -123,19 +123,19 @@ public class Item {
     }
 
     private boolean hasQualityGreaterThan(int value) {
-        return quality > value;
+        return quality.above(value);
     }
 
     private void decreaseQualityByOne() {
-        --quality;
+        quality.decreaseByOne();
     }
 
     private boolean hasQualityLessThan(int value) {
-        return quality < value;
+        return quality.below(value);
     }
 
     private void increaseQualityByOne() {
-        ++quality;
+        quality.increaseByOne();
     }
 
     private boolean isSellInBelow(int value) {
