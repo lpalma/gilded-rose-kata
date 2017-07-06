@@ -90,10 +90,8 @@ public class Item {
     }
 
     private void updateQualityBasedOnSellIn() {
-        if (sellIn < 0) {
-            if (shouldDecreaseQualityByOne()) {
-                decreaseQualityByOne();
-            }
+        if (sellIn < 0 && shouldDecreaseQualityByOne()) {
+            decreaseQualityByOne();
         }
     }
 
