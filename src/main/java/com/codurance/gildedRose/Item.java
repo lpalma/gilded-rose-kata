@@ -7,8 +7,6 @@ public class Item {
     public static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
     public static final int ZERO = 0;
     public static final int FIFTY = 50;
-    public static final int ELEVEN = 11;
-    public static final int SIX = 6;
     public static final int TEN = 10;
     public static final int FIVE = 5;
 
