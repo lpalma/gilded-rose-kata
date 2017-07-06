@@ -95,7 +95,7 @@ public class Item {
             decreaseQualityByOne();
         }
 
-        updateSellIn();
+        decreaseSellInByOne();
 
         if (sellIn < 0 && hasQualityGreaterThan(ZERO)) {
             decreaseQualityByOne();
@@ -122,7 +122,7 @@ public class Item {
             }
         }
 
-        updateSellIn();
+        decreaseSellInByOne();
 
         if (sellIn < 0) {
             updateQualityForBackstagePasses();
@@ -134,7 +134,7 @@ public class Item {
             increaseQualityByOne();
         }
 
-        updateSellIn();
+        decreaseSellInByOne();
 
         if (sellIn < 0) {
             updateQualityForAgedBrie();
@@ -151,7 +151,7 @@ public class Item {
         }
     }
 
-    private void updateSellIn() {
+    private void decreaseSellInByOne() {
         sellIn = sellIn - 1;
     }
 }
