@@ -63,6 +63,10 @@ public class Item {
     }
 
     private void updateSpecialItems() {
+        if (hasQualityLessThan(FIFTY)) {
+            increaseQualityByOne();
+        }
+
         if (isAgedBrie()) {
             updateAgedBrie();
             return;
@@ -70,10 +74,7 @@ public class Item {
 
         if (isBackstagePasses()) {
             updateBackstagePasses();
-            return;
         }
-
-        updateSulfurasHandOfRagnaros();
     }
 
     private void updateOtherItems() {
@@ -88,17 +89,7 @@ public class Item {
         }
     }
 
-    private void updateSulfurasHandOfRagnaros() {
-        if (hasQualityLessThan(FIFTY)) {
-            increaseQualityByOne();
-        }
-    }
-
     private void updateBackstagePasses() {
-        if (hasQualityLessThan(FIFTY)) {
-            increaseQualityByOne();
-        }
-
         if (isSellInBelow(ELEVEN) && hasQualityLessThan(FIFTY)) {
 
             increaseQualityByOne();
@@ -116,10 +107,6 @@ public class Item {
     }
 
     private void updateAgedBrie() {
-        if (hasQualityLessThan(FIFTY)) {
-            increaseQualityByOne();
-        }
-
         decreaseSellInByOne();
 
         if (isSellInBelow(ZERO)) {
