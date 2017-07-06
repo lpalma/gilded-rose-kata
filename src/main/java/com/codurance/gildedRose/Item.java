@@ -56,20 +56,24 @@ public class Item {
             increaseQuality();
         }
 
-        updateSellIn();
-
         if (isAgedBrie()) {
             updateAgedBrie();
+            return;
         }
 
         if (isBackstagePasses()) {
             updateBackstagePasses();
+            return;
         }
-
-        updateQualityBasedOnSellIn();
+        
+        if (!isSulfurasHandOfRagnaros()) {
+            updateOtherItems();
+        }
     }
 
     private void updateBackstagePasses() {
+        updateSellIn();
+
         if (sellIn < 0) {
             updateQualityForBackstagePasses();
         }
@@ -80,6 +84,8 @@ public class Item {
     }
 
     private void updateAgedBrie() {
+        updateSellIn();
+
         if (sellIn < 0) {
             updateQualityForAgedBrie();
         }
@@ -89,10 +95,16 @@ public class Item {
         return hasName(AGED_BRIE);
     }
 
-    private void updateQualityBasedOnSellIn() {
-        if (sellIn < 0 && shouldDecreaseQualityByOne()) {
+    private void updateOtherItems() {
+        updateSellIn();
+
+        if (sellIn < 0 && hasQualityGreaterThan(ZERO)) {
             decreaseQualityByOne();
         }
+    }
+
+    private boolean isSulfurasHandOfRagnaros() {
+        return hasName(SULFURAS_HAND_OF_RAGNAROS);
     }
 
     private void updateQualityForBackstagePasses() {
@@ -106,9 +118,7 @@ public class Item {
     }
 
     private void updateSellIn() {
-        if (!hasName(SULFURAS_HAND_OF_RAGNAROS)) {
-            sellIn = sellIn - 1;
-        }
+        sellIn = sellIn - 1;
     }
 
     private void increaseQuality() {
