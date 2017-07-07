@@ -29,10 +29,6 @@ public class Item {
                 + quality.value();
     }
 
-    public String name() {
-        return name.value();
-    }
-
     public void update() {
         decreaseSellIn();
 
