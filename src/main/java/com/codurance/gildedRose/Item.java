@@ -20,6 +20,14 @@ public class Item {
         this.quality = new ItemQuality(quality);
     }
 
+    public void update() {
+        decreaseSellIn();
+
+        ItemQualityUpdater qualityUpdater = makeItemQualityUpdater();
+
+        quality = qualityUpdater.update();
+    }
+
    @Override
    public String toString() {
         return name.value()
@@ -27,14 +35,6 @@ public class Item {
                 + sellIn.value()
                 + ", "
                 + quality.value();
-    }
-
-    public void update() {
-        decreaseSellIn();
-
-        ItemQualityUpdater qualityUpdater = makeItemQualityUpdater();
-
-        quality = qualityUpdater.update();
     }
 
     private ItemQualityUpdater makeItemQualityUpdater() {
@@ -53,10 +53,6 @@ public class Item {
         return new RegularItemQualityUpdater(quality, sellIn);
     }
 
-    private boolean hasName(String name) {
-        return this.name.is(name);
-    }
-
     private void decreaseSellIn() {
         if (!isSulfurasHandOfRagnaros()) {
             sellIn.decreaseByOne();
@@ -73,5 +69,9 @@ public class Item {
 
     private boolean isSulfurasHandOfRagnaros() {
         return hasName(SULFURAS_HAND_OF_RAGNAROS);
+    }
+
+    private boolean hasName(String name) {
+        return this.name.is(name);
     }
 }
