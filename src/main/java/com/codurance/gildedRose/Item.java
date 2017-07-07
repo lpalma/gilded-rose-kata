@@ -20,12 +20,16 @@ public class Item {
         this.quality = new ItemQuality(quality);
     }
 
-    public void update() {
-        decreaseSellIn();
-
+    public void updateQuality() {
         ItemQualityUpdater qualityUpdater = makeItemQualityUpdater();
 
         quality = qualityUpdater.update();
+    }
+
+    public void decreaseSellIn() {
+        if (!isSulfurasHandOfRagnaros()) {
+            sellIn.decreaseByOne();
+        }
     }
 
    @Override
@@ -51,12 +55,6 @@ public class Item {
         }
 
         return new RegularItemQualityUpdater(quality, sellIn);
-    }
-
-    private void decreaseSellIn() {
-        if (!isSulfurasHandOfRagnaros()) {
-            sellIn.decreaseByOne();
-        }
     }
 
     private boolean isBackstagePasses() {

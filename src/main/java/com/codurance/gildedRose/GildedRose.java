@@ -14,7 +14,9 @@ class GildedRose {
 
     private void updateAllItems() {
         for (Item item : items) {
-            item.update();
+            item.decreaseSellIn();
+
+            item.updateQuality();
         }
     }
 }
