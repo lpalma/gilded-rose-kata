@@ -15,34 +15,27 @@ public class BackstagePassesItemQualityUpdater implements ItemQualityUpdater {
     public ItemQuality update() {
         ItemQuality updatedQuality = new ItemQuality(quality.value());
 
-        if (isQualityBelowThreshold(updatedQuality)) {
-            updatedQuality.increment();
+        if (isSellInBelow(0)) {
+            updatedQuality.setToZero();
+
+            return updatedQuality;
         }
 
-        updateBackstagePasses(updatedQuality);
+        increaseQuality(updatedQuality);
 
         return updatedQuality;
     }
 
-    private void updateBackstagePasses(ItemQuality updatedQuality) {
-        if (isSellInBelow(0)) {
-            updatedQuality.setToZero();
-            return;
-        }
-
-        increaseQuality(updatedQuality);
-    }
-
     private void increaseQuality(ItemQuality updatedQuality) {
-        if (!isQualityBelowThreshold(updatedQuality)) {
-            return;
-        }
-
-        if (isSellInBelow(10)) {
+        if (isQualityBelowThreshold(updatedQuality)) {
             updatedQuality.increment();
         }
 
-        if (isSellInBelow(5)) {
+        if (isSellInBelow(10) && isQualityBelowThreshold(updatedQuality)) {
+            updatedQuality.increment();
+        }
+
+        if (isSellInBelow(5) && isQualityBelowThreshold(updatedQuality)) {
             updatedQuality.increment();
         }
     }
