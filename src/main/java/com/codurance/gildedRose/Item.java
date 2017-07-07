@@ -1,5 +1,7 @@
 package com.codurance.gildedRose;
 
+import com.codurance.gildedRose.qualityUpdater.*;
+
 public class Item {
 
     public static final String AGED_BRIE = "Aged Brie";
