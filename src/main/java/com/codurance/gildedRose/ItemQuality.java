@@ -16,7 +16,7 @@ public class ItemQuality {
         return this.value > value;
     }
 
-    public void decreaseByOne() {
+    public void decrement() {
         --value;
     }
 
@@ -24,7 +24,7 @@ public class ItemQuality {
         return this.value < value;
     }
 
-    public void increaseByOne() {
+    public void increment() {
         ++value;
     }
 

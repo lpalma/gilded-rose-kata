@@ -16,22 +16,22 @@ public class AgedBrieItemQualityUpdater implements ItemQualityUpdater {
     public ItemQuality update() {
         ItemQuality updatedQuality = new ItemQuality(quality.value());
 
-        if (hasQualityLessThan(QUALITY_THRESHOLD)) {
-            updatedQuality.increaseByOne();
+        if (isQualityBelowThreshold()) {
+            updatedQuality.increment();
         }
 
-        if (isSellInBelow(SELL_IN_THRESHOLD) && hasQualityLessThan(QUALITY_THRESHOLD)) {
-            updatedQuality.increaseByOne();
+        if (isSellInBelowThreshold() && isQualityBelowThreshold()) {
+            updatedQuality.increment();
         }
 
         return updatedQuality;
     }
 
-    private boolean hasQualityLessThan(int value) {
-        return quality.below(value);
+    private boolean isQualityBelowThreshold() {
+        return quality.below(QUALITY_THRESHOLD);
     }
 
-    private boolean isSellInBelow(int value) {
-        return sellIn.below(value);
+    private boolean isSellInBelowThreshold() {
+        return sellIn.below(SELL_IN_THRESHOLD);
     }
 }

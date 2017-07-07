@@ -13,14 +13,14 @@ public class SulfurasHandOfRagnarosItemQualityUpdater implements ItemQualityUpda
     public ItemQuality update() {
         ItemQuality updatedQuality = new ItemQuality(quality.value());
 
-        if (hasQualityLessThan(QUALITY_THRESHOLD)) {
-            updatedQuality.increaseByOne();
+        if (isQualityBelowThreshold()) {
+            updatedQuality.increment();
         }
 
         return updatedQuality;
     }
 
-    private boolean hasQualityLessThan(int value) {
-        return quality.below(value);
+    private boolean isQualityBelowThreshold() {
+        return quality.below(QUALITY_THRESHOLD);
     }
 }

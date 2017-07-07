@@ -2,7 +2,6 @@ package com.codurance.gildedRose;
 
 public class BackstagePassesItemQualityUpdater implements ItemQualityUpdater {
     public static final int QUALITY_THRESHOLD = 50;
-    public static final int SELL_IN_THRESHOLD = 0;
 
     private ItemQuality quality;
     private SellIn sellIn;
@@ -17,7 +16,7 @@ public class BackstagePassesItemQualityUpdater implements ItemQualityUpdater {
         ItemQuality updatedQuality = new ItemQuality(quality.value());
 
         if (isQualityBelowThreshold(updatedQuality)) {
-            updatedQuality.increaseByOne();
+            updatedQuality.increment();
         }
 
         updateBackstagePasses(updatedQuality);
@@ -26,7 +25,7 @@ public class BackstagePassesItemQualityUpdater implements ItemQualityUpdater {
     }
 
     private void updateBackstagePasses(ItemQuality updatedQuality) {
-        if (isSellInBelow(SELL_IN_THRESHOLD)) {
+        if (isSellInBelow(0)) {
             updatedQuality.setToZero();
             return;
         }
@@ -40,11 +39,11 @@ public class BackstagePassesItemQualityUpdater implements ItemQualityUpdater {
         }
 
         if (isSellInBelow(10)) {
-            updatedQuality.increaseByOne();
+            updatedQuality.increment();
         }
 
         if (isSellInBelow(5)) {
-            updatedQuality.increaseByOne();
+            updatedQuality.increment();
         }
     }
 

@@ -16,11 +16,11 @@ public class RegularItemQualityUpdater implements ItemQualityUpdater {
         ItemQuality updatedQuality = new ItemQuality(quality.value());
 
         if (isQualityAboveThreshold(updatedQuality)) {
-            updatedQuality.decreaseByOne();
+            updatedQuality.decrement();
         }
 
-        if (isSellInBelow(SELL_IN_THRESHOLD) && isQualityAboveThreshold(updatedQuality)) {
-            updatedQuality.decreaseByOne();
+        if (isSellInBelowThreshold() && isQualityAboveThreshold(updatedQuality)) {
+            updatedQuality.decrement();
         }
 
         return updatedQuality;
@@ -30,7 +30,7 @@ public class RegularItemQualityUpdater implements ItemQualityUpdater {
         return updatedQuality.above(QUALITY_THRESHOLD);
     }
 
-    private boolean isSellInBelow(int value) {
-        return sellIn.below(value);
+    private boolean isSellInBelowThreshold() {
+        return sellIn.below(SELL_IN_THRESHOLD);
     }
 }
