@@ -11,7 +11,7 @@ public class SellIn {
         return value;
     }
 
-    public void decreaseByOne() {
+    public void decrement() {
         --value;
     }
 

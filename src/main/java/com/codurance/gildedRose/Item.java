@@ -28,7 +28,7 @@ public class Item {
 
     public void decreaseSellIn() {
         if (!isSulfurasHandOfRagnaros()) {
-            sellIn.decreaseByOne();
+            sellIn.decrement();
         }
     }
 
