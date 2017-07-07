@@ -1,6 +1,7 @@
 package com.codurance.gildedRose;
 
 public class ItemQuality {
+
     private int value;
 
     public ItemQuality(int value) {

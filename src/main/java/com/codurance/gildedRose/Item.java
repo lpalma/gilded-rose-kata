@@ -5,10 +5,6 @@ public class Item {
     public static final String AGED_BRIE = "Aged Brie";
     public static final String BACKSTAGE_PASSES_TO_A_TAFKAL80_ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
     public static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
-    public static final int ZERO = 0;
-    public static final int FIFTY = 50;
-    public static final int TEN = 10;
-    public static final int FIVE = 5;
 
     private ItemName name;
 
@@ -20,10 +16,6 @@ public class Item {
         this.name = new ItemName(name);
         this.sellIn = new SellIn(sellIn);
         this.quality = new ItemQuality(quality);
-    }
-
-    private boolean hasName(String name) {
-        return this.name.is(name);
     }
 
    @Override
@@ -42,24 +34,35 @@ public class Item {
     public void update() {
         decreaseSellIn();
 
-        if (isSpecialItem()) {
-            updateSpecialItems();
-            return;
+        ItemQualityUpdater qualityUpdater = makeItemQualityUpdater();
+
+        quality = qualityUpdater.update();
+    }
+
+    private ItemQualityUpdater makeItemQualityUpdater() {
+        if (isAgedBrie()) {
+            return new AgedBrieItemQualityUpdater(quality, sellIn);
         }
 
-        decreaseQuality();
+        if (isBackstagePasses()) {
+            return new BackstagePassesItemQualityUpdater(quality, sellIn);
+        }
+
+        if (isSulfurasHandOfRagnaros()) {
+            return new SulfurasHandOfRagnarosItemQualityUpdater(quality, sellIn);
+        }
+
+        return new RegularItemQualityUpdater(quality, sellIn);
+    }
+
+    private boolean hasName(String name) {
+        return this.name.is(name);
     }
 
     private void decreaseSellIn() {
         if (!isSulfurasHandOfRagnaros()) {
-            decreaseSellInByOne();
+            sellIn.decreaseByOne();
         }
-    }
-
-    private boolean isSpecialItem() {
-        return isAgedBrie()
-                || isBackstagePasses()
-                || isSulfurasHandOfRagnaros();
     }
 
     private boolean isBackstagePasses() {
@@ -72,87 +75,5 @@ public class Item {
 
     private boolean isSulfurasHandOfRagnaros() {
         return hasName(SULFURAS_HAND_OF_RAGNAROS);
-    }
-
-    private void updateSpecialItems() {
-        if (hasQualityLessThan(FIFTY)) {
-            increaseQualityByOne();
-        }
-
-        if (isAgedBrie()) {
-            updateAgedBrie();
-            return;
-        }
-
-        if (isBackstagePasses()) {
-            updateBackstagePasses();
-        }
-    }
-
-    private void decreaseQuality() {
-        if (hasQualityGreaterThan(ZERO)) {
-            decreaseQualityByOne();
-        }
-
-        if (isSellInBelow(ZERO) && hasQualityGreaterThan(ZERO)) {
-            decreaseQualityByOne();
-        }
-    }
-
-    private void updateBackstagePasses() {
-        if (isSellInBelow(ZERO)) {
-            setQualityToZero();
-            return;
-        }
-
-        increaseQuality();
-    }
-
-    private void increaseQuality() {
-        if (!hasQualityLessThan(FIFTY)) {
-            return;
-        }
-
-        if (isSellInBelow(TEN)) {
-            increaseQualityByOne();
-        }
-
-        if (isSellInBelow(FIVE)) {
-            increaseQualityByOne();
-        }
-    }
-
-    private void updateAgedBrie() {
-        if (isSellInBelow(ZERO) && hasQualityLessThan(FIFTY)) {
-            increaseQualityByOne();
-        }
-    }
-
-    private void setQualityToZero() {
-        quality.setToZero();
-    }
-
-    private void decreaseSellInByOne() {
-        sellIn.decreaseByOne();
-    }
-
-    private boolean hasQualityGreaterThan(int value) {
-        return quality.above(value);
-    }
-
-    private void decreaseQualityByOne() {
-        quality.decreaseByOne();
-    }
-
-    private boolean hasQualityLessThan(int value) {
-        return quality.below(value);
-    }
-
-    private void increaseQualityByOne() {
-        quality.increaseByOne();
-    }
-
-    private boolean isSellInBelow(int value) {
-        return sellIn.below(value);
     }
 }
