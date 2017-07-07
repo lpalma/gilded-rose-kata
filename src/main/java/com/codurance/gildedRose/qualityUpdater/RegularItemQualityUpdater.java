@@ -2,7 +2,6 @@ package com.codurance.gildedRose.qualityUpdater;
 
 import com.codurance.gildedRose.ItemQuality;
 import com.codurance.gildedRose.SellIn;
-import com.codurance.gildedRose.qualityUpdater.ItemQualityUpdater;
 
 public class RegularItemQualityUpdater implements ItemQualityUpdater {
     public static final int QUALITY_THRESHOLD = 0;
