@@ -3,18 +3,18 @@ package com.codurance.gildedRose.qualityUpdater;
 import com.codurance.gildedRose.ItemQuality;
 import com.codurance.gildedRose.SellIn;
 
-public class ConjuredManaCakeQualityUpdater implements ItemQualityUpdater {
+public class ConjuredItemQualityUpdater implements ItemQualityUpdater {
     public static final int QUALITY_THRESHOLD = 0;
     public static final int SELL_IN_THRESHOLD = 0;
 
     private ItemQuality quality;
     private SellIn sellIn;
 
-    public ConjuredManaCakeQualityUpdater(ItemQuality quality, SellIn sellIn) {
+    public ConjuredItemQualityUpdater(ItemQuality quality, SellIn sellIn) {
         this.quality = quality;
         this.sellIn = sellIn;
     }
-    
+
     public ItemQuality update() {
         ItemQuality updatedQuality = new ItemQuality(quality.value());
 
